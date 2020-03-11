@@ -115,3 +115,90 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
+  
+  
+### Email, Password를 통한 회원가입 및 로그인
+<ul>
+  <a href=https://firebase.google.cn/docs/auth/android/start><li>로그인 및 비밀번호 인증 가이드라인 참고</li></a>
+</ul>
+  
+```
+public class MainActivity extends AppCompatActivity {
+    private EditText email,pass; //email, password 에딧텍스트
+    private Button sign; // 로그인 및 회원가입 버튼
+    private Button logout;
+    private FirebaseAuth mAuth;
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null)
+            Toast.makeText(MainActivity.this,currentUser.getEmail(),Toast.LENGTH_SHORT).show();
+
+    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        logout=findViewById(R.id.logout);
+        email=findViewById(R.id.emailtext);
+        pass=findViewById(R.id.passwordtext);
+        sign=findViewById(R.id.signup);
+
+        mAuth = FirebaseAuth.getInstance(); //파이어베이스 인증을 위한 객체생성
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signOut();
+            }
+        });
+        sign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signInUser(email.getText().toString(),pass.getText().toString());
+            }
+        });
+    }
+    public void createNewAccount(String email,String password){ //회원가입 메소드
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) { // 인증이 성공시,
+                            FirebaseUser user = mAuth.getCurrentUser(); //인증받은 user의 객체
+                            Toast.makeText(MainActivity.this,"회원가입 성공",Toast.LENGTH_SHORT).show();
+                            //DoSomething(user);
+
+                        }
+                        else {// 인증이 실패시,
+                           //Something else...
+                        }
+                    }
+                });
+    }
+    public void signInUser(String email,String password){//기존 사용자의 로그인 메소드
+        final String Email=email;
+        final String Password=password;
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) { //인증 성공시,
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(MainActivity.this,user.getEmail(),Toast.LENGTH_SHORT).show();
+                            //DoSomething(user);
+                        }
+                        else { //인증 실패시,
+                            createNewAccount(Email,Password); //기존 로그인 사용자가 아니라면 회원가입을 한다.
+                        }
+                    }
+                });
+    }
+    private void signOut() {
+        // 파이어베이스 로그아웃
+        mAuth.signOut();
+        Toast.makeText(MainActivity.this,"로그아웃 완료",Toast.LENGTH_SHORT).show();
+    }
+}
+```
