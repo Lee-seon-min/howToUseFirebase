@@ -1,6 +1,6 @@
 # howToUseFirebase
 
-### 나의 Android 프로젝트에 FireBase 추가  
+### ※나의 Android 프로젝트에 FireBase 추가  
 
 <ol>
   <li> firebase사이트에서 나만의 프로젝트를 만든다.(프로젝트 추가하기)
@@ -11,7 +11,7 @@
 <a href=https://firebase.google.com/docs/android/setup>Firebase 추가 가이드 라인</a>  
   
   
-### 구글인증을 통한 Firebase인증
+### ※구글인증을 통한 Firebase인증
 <ul>
   <a href=https://firebase.google.com/docs/auth/android/google-signin><li>구글 인증 및 Firebase 인증 가이드라인 참고</li></a>
 </ul>
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 ```
   
   
-### Email, Password를 통한 회원가입 및 로그인
+### ※Email, Password를 통한 회원가입 및 로그인
 <ul>
   <a href=https://firebase.google.cn/docs/auth/android/start><li>로그인 및 비밀번호 인증 가이드라인 참고</li></a>
 </ul>
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
 ```
   
   
-### Auth Listener  
+### ※Auth Listener  
 로그인된 상태 또는 로그아웃된 상태에 따른 리스너를 설정해줄수 있다.  
 #### 리스너 객체 생성(변수 선언)  
 ```
@@ -252,7 +252,7 @@ private FirebaseAuth.AuthStateListener authStateListener; //로그인 상태변�
 ```
   
   
-### 로그인 후, 새로운 Acticity에서의 Auth Control  
+### ※로그인 후, 새로운 Acticity에서의 Auth Control  
 새로운 액티비티에서도 로그인 창에서 사용했던 Auth를 컨트롤 할 수 있다.
 #### 객체 생성(변수 선언)
 ```
