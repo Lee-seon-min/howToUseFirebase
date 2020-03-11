@@ -242,10 +242,10 @@ private FirebaseAuth.AuthStateListener authStateListener; //로그인 상태변�
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user=firebaseAuth.getCurrentUser();
                 if(user!=null){
-                    //DoSomthing_login
+                    //DoSomething_login
                 }
                 else{
-                    //DoSomthing_logout
+                    //DoSomething_logout
                 }
             }
         };
