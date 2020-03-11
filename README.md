@@ -1,6 +1,6 @@
 # howToUseFirebase
 
-## 나의 Android 프로젝트에 FireBase 추가  
+### 나의 Android 프로젝트에 FireBase 추가  
 
 <ol>
   <li> firebase사이트에서 나만의 프로젝트를 만든다.(프로젝트 추가하기)
@@ -10,7 +10,8 @@
     <a href=https://firebase.google.com/docs/android/setup>Firebase 가이드 라인</a>
 </ol>  
   
-## 구글인증을 통한 Firebase인증
+  
+### 구글인증을 통한 Firebase인증
 <ul>
   <a href=https://firebase.google.com/docs/auth/android/google-signin><li>구글 인증및 Firebase 인증 가이드라인</li></a>
 </ul>
