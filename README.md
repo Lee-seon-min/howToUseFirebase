@@ -202,3 +202,65 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
+  
+  
+### Auth Listener  
+로그인된 상태 또는 로그아웃된 상태에 따른 리스너를 설정해줄수 있다.  
+#### 리스너 객체 생성(변수 선언)  
+```
+private FirebaseAuth.AuthStateListener authStateListener; //로그인 상태변화에 따른 리스너
+```
+  
+  
+#### 리스너 설정
+```
+@Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        mAuth.addAuthStateListener(authStateListener);
+
+        /*if(currentUser!=null)
+            Toast.makeText(MainActivity.this,currentUser.getEmail(),Toast.LENGTH_SHORT).show();*/
+            //리스너의 정의로 이것은 더는 필요가 없어질것입니다.
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(authStateListener!=null) //리스너를 해체합니다.
+            mAuth.removeAuthStateListener(authStateListener);
+    }
+```
+  
+  
+#### 리스너 이벤트 정의
+```
+ authStateListener=new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user=firebaseAuth.getCurrentUser();
+                if(user!=null){
+                    //DoSomthing_login
+                }
+                else{
+                    //DoSomthing_logout
+                }
+            }
+        };
+```
+  
+  
+### 로그인 후, 새로운 Acticity에서의 Auth Control  
+새로운 액티비티에서도 로그인 창에서 사용했던 Auth를 컨트롤 할 수 있다.
+#### 객체 생성(변수 선언)
+```
+private FirebaseAuth auth; //Auth객체를 그대로 사용할 변수
+```
+  
+  
+#### FirebaseAuth 객체 가져오기
+```
+auth = FirebaseAuth.getInstance(); //같은 객체
+```
