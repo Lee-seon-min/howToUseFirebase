@@ -1,4 +1,4 @@
-# howToUseFirebase
+# howToUseFirebase_Auth
 
 ### ※나의 Android 프로젝트에 FireBase 추가  
 
